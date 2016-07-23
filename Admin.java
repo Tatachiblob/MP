@@ -1,4 +1,4 @@
-//Inoue, Yuta   Salva Trisha
+//Inoue, Yuta   Salva, Trisha
 public class Admin extends Account {
     
     public Admin(){
