@@ -7,8 +7,12 @@ public class EnrollmentSystem {
     private ArrayList<Section> sections;
     private ArrayList<Course> courses;
     
+    //Still have to think if my constructor is ok
     public EnrollmentSystem(){
-        
+        this.admon = new Admin();
+        this.students = new ArrayList<>();
+        this.sections = new ArrayList<>();
+        this.courses = new ArrayList<>();
     }
     
         //Boolean so that can display error message for later things
