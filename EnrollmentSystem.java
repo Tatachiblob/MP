@@ -9,7 +9,7 @@ public class EnrollmentSystem {
     
     //Still have to think if my constructor is ok
     public EnrollmentSystem(){
-        this.admon = new Admin();
+        this.admin = new Admin();
         this.students = new ArrayList<>();
         this.sections = new ArrayList<>();
         this.courses = new ArrayList<>();
