@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 //Inoue, Yuta   Salva, Trisha
+=======
+//Inoue, Yuta   Salva, Trisha testing
+>>>>>>> origin/master
 import java.util.ArrayList;
 public class EnrollmentSystem {
     
@@ -7,11 +11,20 @@ public class EnrollmentSystem {
     private ArrayList<Section> sections;
     private ArrayList<Course> courses;
     
+<<<<<<< HEAD
     public EnrollmentSystem(String user_name, String password){
         this.admin = new Admin();
         this.students = new ArrayList<>();
 	this.sections = new ArrayList<>();
 	this.courses = new ArrayList<>();
+=======
+    //Still have to think if my constructor is ok
+    public EnrollmentSystem(){
+        this.admin = new Admin();
+        this.students = new ArrayList<>();
+        this.sections = new ArrayList<>();
+        this.courses = new ArrayList<>();
+>>>>>>> origin/master
     }
     
         //Boolean so that can display error message for later things

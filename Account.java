@@ -11,4 +11,4 @@ public class Account {
     
     public String getUserName(){return user_name;}
     
-}
+}//Base of Student account and Admin account
