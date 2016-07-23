@@ -16,8 +16,8 @@ public class EnrollmentSystem {
     }
     
         //Boolean so that can display error message for later things
-    public boolean RegisterStudentAccount(String ID, String password, String last_name, String first_name){
-        Student s = new Student(ID, password, last_name, first_name);
+    public boolean RegisterStudentAccount(String ID, String password, String lastName, String firstName){
+        Student s = new Student(ID, password, lastName, firstName);
         
         if(students.size() > 0){
             for(Student y : students){
@@ -31,7 +31,7 @@ public class EnrollmentSystem {
         return true;
     }
     
-    public Student editStudent(String ID, String first_name, String last_name){
+    public Student editStudent(String ID, String firstName, String lastName){
         Student s = null;
         
         if(students.isEmpty())
@@ -42,8 +42,8 @@ public class EnrollmentSystem {
                 s = students.get(i);
             }
         }
-        s.setFirstName(first_name);
-        s.setLastName(last_name);
+        s.setFirstName(firstName);
+        s.setLastName(lastName);
         return s;
     }
     

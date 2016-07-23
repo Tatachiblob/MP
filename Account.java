@@ -1,14 +1,14 @@
 //Inoue, Yuta   Salva, Trisha
 public class Account {
     
-    private String user_name;
+    private String userName;
     private String password;
     
-    public Account(String user_name, String password){
-        this.user_name = user_name;
+    public Account(String userName, String password){
+        this.userName = userName;
         this.password = password;
     }
     
-    public String getUserName(){return user_name;}
+    public String getUserName(){return userName;}
     
 }//Base of Student account and Admin account

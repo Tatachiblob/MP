@@ -2,20 +2,20 @@
 import java.util.ArrayList;
 public class Section {
     
-    private String section_name;
+    private String sectionName;
     private String faculty;
     private String schedule;
-    private String start_time;
-    private String end_time;
+    private String startTime;
+    private String endTime;
     private int capacity;
     
     
-    public Section(String name, String faculty, String schedue, String start, String end, int capacity){
-        this.section_name = name;
+    public Section(String name, String faculty, String schedule, String start, String end, int capacity){
+        this.sectionName = name;
         this.faculty = faculty;
-        this.schedule = schedue;
-        this.start_time = start;
-        this.end_time = end;
+        this.schedule = schedule;
+        this.startTime = start;
+        this.endTime = end;
         this.capacity = capacity;
     }
     
@@ -24,7 +24,7 @@ public class Section {
     }
     
     public boolean isThreeChar(){//returns true if three characters;
-        return section_name.length() == 3;
+        return sectionName.length() == 3;
     }
     
 }
