@@ -14,8 +14,8 @@ public class Student extends Account {
         this.firstName = firstName;
     }
     
-    public void setLastName(String lasName){
-        this.lastName = lasName;
+    public void setLastName(String lastName){
+        this.lastName = lastName;
     }
     
     public boolean isEqual(Student s){//return true if equal, else not equal
