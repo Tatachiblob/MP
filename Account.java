@@ -1,3 +1,4 @@
+//Inoue, Yuta   Salva, Trisha
 public class Account {
     
     private String user_name;

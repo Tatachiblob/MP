@@ -1,3 +1,4 @@
+//Inoue, Yuta   Salva, Trisha
 public class Student extends Account {
     
     private String first_name;

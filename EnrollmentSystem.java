@@ -1,3 +1,4 @@
+//Inoue, Yuta   Salva, Trisha
 import java.util.ArrayList;
 public class EnrollmentSystem {
     
@@ -6,8 +7,11 @@ public class EnrollmentSystem {
     private ArrayList<Section> sections;
     private ArrayList<Course> courses;
     
-    public EnrollmentSystem(){
-        
+    public EnrollmentSystem(String user_name, String password){
+        this.admin = new Admin();
+        this.students = new ArrayList<>();
+	this.sections = new ArrayList<>();
+	this.courses = new ArrayList<>();
     }
     
         //Boolean so that can display error message for later things
@@ -28,6 +32,9 @@ public class EnrollmentSystem {
     
     public Student editStudent(String ID, String first_name, String last_name){
         Student s = null;
+        
+        if(students.isEmpty())
+            return null;
         
         for(int i = 0; i < students.size(); i++){
             if(students.get(i).getUserName() .equals(ID)){
