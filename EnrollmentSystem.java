@@ -15,7 +15,7 @@ public class EnrollmentSystem {
         this.courses = new ArrayList<>();
     }
     
-        //Boolean so that can display error message for later things
+    //Boolean so that can display error message for later things
     public boolean RegisterStudentAccount(String ID, String password, String lastName, String firstName, int min, int max){
         Student s = new Student(ID, password, lastName, firstName, min, max);
         
@@ -31,20 +31,22 @@ public class EnrollmentSystem {
         return true;
     }
     
-    public Student editStudent(String ID, String firstName, String lastName){
-        Student s = null;
-        
+    public boolean editStudent(String ID, String firstName, String lastName){//return true if edited
         if(students.isEmpty())
-            return null;
-        
-        for(int i = 0; i < students.size(); i++){
-            if(students.get(i).getUserName() .equals(ID)){
-                s = students.get(i);
+            return false;
+        else{
+            Student s = null;
+            for(int i = 0; i < students.size(); i++){
+                if(students.get(i).getUserName() .equals(ID)){
+                    s = students.get(i);
+                }
             }
+            if(s == null)
+                return false;
+            s.setFirstName(firstName);
+            s.setLastName(lastName);
+            return true;
         }
-        s.setFirstName(firstName);
-        s.setLastName(lastName);
-        return s;
     }
     
     public boolean addCourse(String code, String name, int units){
@@ -61,18 +63,25 @@ public class EnrollmentSystem {
     }
     
     public boolean openSection(String name, String faculty, String schedule, String start, String end, int capacity){
-        Section s = new Section(name, faculty, schedule, start, end, capacity);
-        Course c;
-        for(int i = 0; i < courses.size(); i++){
-            c = courses.get(i);
-            for(int j = 0; j < c.getSections().size(); j++){
-                if()
-            }
-        }
-        return false;
+        
     }
-    
+    //Not yet complete
     public void viewClassList(String course_name, String section){
         
-    }    
+        System.out.println("Course: ");
+        System.out.println("Section: ");
+        System.out.println("List of Students enrolled: ");
+        System.out.println("Total slots: ");
+        System.out.println("Remaining slots: ");
+    }
+    
+    public ArrayList<Student> getStudent(){return students;}
+    
+    public static void main(String[] args) {
+        EnrollmentSystem e = new EnrollmentSystem();
+        for (Student student : e.getStudent()) {
+            student.display();
+        }
+    }
+    
 }

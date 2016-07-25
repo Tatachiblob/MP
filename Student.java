@@ -35,4 +35,13 @@ public class Student extends Account {
         System.out.println("Last Name: " + lastName);
     }
     
+    //Testing Testing
+    /*public static void main(String[] args) {
+        Student s1 = new Student("11512709", "Tatachi9", "Inoue", "Yuta", 0, 0);
+        Student s2 = new Student("115122709", "Tatachi9", "Inoue", "Kiku", 0, 0);
+        
+        System.out.println(s1.isEqual(s2));
+        System.out.println(s2.isEqual(s1));
+    }*/
+    
 }
