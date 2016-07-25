@@ -3,11 +3,15 @@ public class Student extends Account {
     
     private String firstName;
     private String lastName;
+    private int minUnit;
+    private int maxUnit;
     
-    public Student(String userName, String password, String lastName, String firstName){
+    public Student(String userName, String password, String lastName, String firstName, int minUnit, int maxUnit){
         super(userName, password);
         this.firstName = firstName;
         this.lastName = lastName;
+        this.minUnit = minUnit;
+        this.maxUnit = maxUnit;
     }
     
     public void setFirstName(String firstName){

@@ -8,6 +8,7 @@ public class Section {
     private String startTime;
     private String endTime;
     private int capacity;
+    private ArrayList<Student> students;
     
     
     public Section(String name, String faculty, String schedule, String start, String end, int capacity){
@@ -17,6 +18,7 @@ public class Section {
         this.startTime = start;
         this.endTime = end;
         this.capacity = capacity;
+        this.students = new ArrayList<>();
     }
     
     public boolean isValidSchedule(){//returns true if valid
