@@ -36,6 +36,7 @@ public class Section {
         return schedule.equals("MW") || schedule.equals("TH");
     }
     
+
     public boolean isValidTime(String time){//return true if time is valid
         boolean ok = false;
         int index = time.indexOf(":");
@@ -75,6 +76,7 @@ public class Section {
     }
     
     public boolean isNonConflic(Section s){//returns false if there is a conflic in schedule and used for enlisting
+
         int start = toMin(startTime);
         int end = toMin(endTime);
         int otherStart = toMin(s.startTime);
