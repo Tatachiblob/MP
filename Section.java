@@ -36,7 +36,7 @@ public class Section {
         return schedule.equals("MW") || schedule.equals("TH");
     }
     
-    public boolean isNonConflic(Section s){//returns false if there is a conflic in schedule
+    public boolean isNonConflict(Section s){//returns false if there is a conflic in schedule
         int start = toMin(startTime);
         int end = toMin(endTime);
         int otherStart = toMin(s.startTime);
