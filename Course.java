@@ -31,13 +31,13 @@ public class Course {
     public boolean addSection(String name, String faculty, String schedule, String start, String end, int capacity){//returns true if added
         Section s = new Section(name, faculty, schedule, start, end, capacity);
         
-        if(s.isThreeChar() && s.isValidSchedule()){
+        if(s.isThreeChar() && s.isValidSchedule() && s.isValidTime()){
             if(this.sections.isEmpty()){
                 sections.add(s);
                 return true;
             }
             for(int i = 0; i < sections.size(); i++){
-                if(sections.get(i) .isUnique(s)){
+                if(sections.get(i) .isUnique(s) && sections.get(i).isNonConflic(s)){
                     sections.add(s);
                     return true;
                 }
@@ -59,8 +59,8 @@ public class Course {
     /*
     public static void main(String[] args) {
         Course  c = new Course("ARCHOS", "Computer architecture", 0);
-        System.out.println(c.addSection("S13", "Inoue Yuta", "MW", "9:00", "10:00", 10));
-        System.out.println(c.addSection("S13", "Inoue Yuta", "MW", "9:00", "10:00", 10));
+        System.out.println(c.addSection("S13", "Inoue Yuta", "MW", "129:00", "10:00", 10));
+        System.out.println(c.addSection("S13", "Inoue Yuta", "MW", "8:00", "8:40", 10));
         
     }
     */

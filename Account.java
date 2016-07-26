@@ -10,5 +10,8 @@ public class Account {
     }
     
     public String getUserName(){return userName;}
+    public boolean equal(Account a){
+        return this.userName.equals(a.userName) && this.password.equals(a.password);
+    }
     
 }//Base of Student account and Admin account

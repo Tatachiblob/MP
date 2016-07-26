@@ -75,6 +75,10 @@ public class Section {
         return ok;
     }
     
+    public boolean isValidTime(){
+        return isValidTime(startTime) && isValidTime(endTime);
+    }
+    
     public boolean isNonConflic(Section s){//returns false if there is a conflic in schedule and used for enlisting
 
         int start = toMin(startTime);
@@ -129,6 +133,8 @@ public class Section {
     //testing testing
     /*
     public static void main(String[] args) {
+        Section s = new Section("S12", "Roger Uy", "MW", "123:00", "12:00", 12);
+        System.out.println(s.isValidTime());
     }
     */
 }

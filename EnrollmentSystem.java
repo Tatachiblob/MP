@@ -87,7 +87,7 @@ public class EnrollmentSystem {
             }
             //sections is from the courses' sections. Not from this enrollment class
             ArrayList<Section> sections = c.getSections();
-        
+            
             if(c != null){
                 return c.addSection(name, faculty, schedule, start, end, capacity);
             }
@@ -137,32 +137,33 @@ public class EnrollmentSystem {
     }
     
     
-    //Student account
+    //Student account and all incomplete
     public boolean enlistSection(String course, String section){
         
+        return false;
     }
     
     public boolean removeEnlistment(String course, String section){
-        
+        return false;
     }
     
     public boolean enroll(){
-        
+        return false;
     }
     
     public boolean viewEAF(){
-        
+        return false;
     }
     
     public boolean login(String userName, String password){
         Account user = new Account(userName, password);
-        if(user.equals(admin)){
+        if(user.equal(admin)){
             admin.setIsLogIn(true);
             return true;
         }
         else{
             for(Student s : students){
-                if(s.getUserName().equals(user.getUserName())){
+                if(s.equal(user)){
                     s.setIsLogIn(true);
                     return true;
                 }
