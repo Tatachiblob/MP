@@ -1,18 +1,26 @@
 //Inoue, Yuta   Salva, Trisha
+import java.util.ArrayList;
 public class Student extends Account {
     
     private String firstName;
     private String lastName;
+    private boolean isEnrolled;
     private int minUnit;
     private int maxUnit;
+    private ArrayList<Course> enlists;
+    
     
     public Student(String userName, String password, String lastName, String firstName, int minUnit, int maxUnit){
         super(userName, password);
         this.firstName = firstName;
         this.lastName = lastName;
+        this.isEnrolled = false;//not enrolled from the start
         this.minUnit = minUnit;
         this.maxUnit = maxUnit;
+        this.enlists = new ArrayList<>();
     }
+    
+    public boolean getIsEnrolled(){return isEnrolled;}
     
     public void setFirstName(String firstName){
         this.firstName = firstName;
