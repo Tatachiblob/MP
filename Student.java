@@ -16,6 +16,7 @@ public class Student extends Account {
         super(userName, password);
         this.firstName = firstName;
         this.lastName = lastName;
+        this.isLogIn = false;
         this.isEnrolled = false;//not enrolled from the start
         this.minUnit = minUnit;
         this.maxUnit = maxUnit;
@@ -25,6 +26,9 @@ public class Student extends Account {
     public boolean getIsEnrolled(){return isEnrolled;}
     
     public boolean getIsLogIn(){return isLogIn;}
+    public void setIsLogIn(boolean b){
+        this.isLogIn = b;
+    }
     
     public void setFirstName(String firstName){
         this.firstName = firstName;

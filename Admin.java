@@ -9,4 +9,7 @@ public class Admin extends Account {
     }
     
     public boolean getIsLogIn(){return isLogIn;}
+    public void setIsLogIn(boolean b){
+        this.isLogIn = b;
+    }
 }

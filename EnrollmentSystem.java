@@ -16,51 +16,61 @@ public class EnrollmentSystem {
     //For Admin accounts
     //Boolean so that can display error message for later things
     public boolean RegisterStudentAccount(String ID, String password, String lastName, String firstName, int min, int max){
-        Student s = new Student(ID, password, lastName, firstName, min, max);
+        if(admin.getIsLogIn()){
+            Student s = new Student(ID, password, lastName, firstName, min, max);
         
-        if(students.size() > 0){
-            for(Student y : students){
-                if(s.isEqual(y)){
-                    return false;
+            if(students.size() > 0){
+                for(Student y : students){
+                    if(s.isEqual(y)){
+                        return false;
+                    }
                 }
             }
-        }
         
-        students.add(s);
-        return true;
+            students.add(s);
+            return true;
+        }
+        else
+            return false;
     }
     
     //return true if edited
     public boolean editStudent(String ID, String firstName, String lastName){
-        if(students.isEmpty())
-            return false;
-        else{
-            Student s = null;
-            for(int i = 0; i < students.size(); i++){
-                if(students.get(i).getUserName() .equals(ID)){
-                    s = students.get(i);
-                }
-            }
-            if(s == null)
+        if(admin.getIsLogIn()){
+            if(students.isEmpty())
                 return false;
-            s.setFirstName(firstName);
-            s.setLastName(lastName);
-            return true;
+            else{
+                Student s = null;
+                for(int i = 0; i < students.size(); i++){
+                    if(students.get(i).getUserName() .equals(ID)){
+                        s = students.get(i);
+                    }
+                }
+                if(s == null)
+                    return false;
+                s.setFirstName(firstName);
+                s.setLastName(lastName);
+                return true;
+            }
         }
+        else
+            return false;
     }
     
     //returns true if able to addCourse
     public boolean addCourse(String code, String name, int units){
-        Course c = new Course(code, name, units);
-        if(c.isSeven()){
-            if(courses.isEmpty()){
-                courses.add(c);
-                return true;
-            }
-            for(int i = 0; i < courses.size(); i++){
-                if(courses.get(i).isUnique(c)){
+        if(admin.getIsLogIn()){
+            Course c = new Course(code, name, units);
+            if(c.isSeven()){
+                if(courses.isEmpty()){
                     courses.add(c);
                     return true;
+                }
+                for(int i = 0; i < courses.size(); i++){
+                    if(courses.get(i).isUnique(c)){
+                        courses.add(c);
+                        return true;
+                    }
                 }
             }
         }
@@ -69,47 +79,50 @@ public class EnrollmentSystem {
     
     //returns true if able to open a section for a course
     public boolean openSection(String courseCode, String name, String faculty, String schedule, String start, String end, int capacity){
-        Course c = null;
-        for(Course course: courses){
-            if(course.getCode().equals(courseCode))
-                c = course;
-        }
-        //sections is from the courses' sections. Not from this enrollment class
-        ArrayList<Section> sections = c.getSections();
+        if(admin.getIsLogIn()){
+            Course c = null;
+            for(Course course: courses){
+                if(course.getCode().equals(courseCode))
+                    c = course;
+            }
+            //sections is from the courses' sections. Not from this enrollment class
+            ArrayList<Section> sections = c.getSections();
         
-        if(c != null){
-            return c.addSection(name, faculty, schedule, start, end, capacity);
+            if(c != null){
+                return c.addSection(name, faculty, schedule, start, end, capacity);
+            }
         }
-        
         return false;
     }
     
     //Not yet complete
     public boolean viewClassList(String courseCode, String section){
-        Course c = null;
-        Section s = null;
-        for(Course a : courses){
-            if(a.getCode().equals(courseCode)){
-                c = a;
+        if(admin.getIsLogIn()){
+            Course c = null;
+            Section s = null;
+            for(Course a : courses){
+                if(a.getCode().equals(courseCode)){
+                    c = a;
+                }
             }
-        }
-        if(c == null)
-            return false;
+            if(c == null)
+                return false;
         
-        for(Section a : c.getSections()){
-            if(a.getSectionName().equals(section))
-                s = a;
-        }
+            for(Section a : c.getSections()){
+                if(a.getSectionName().equals(section))
+                    s = a;
+            }
         
-        if(s == null)
-            return false;
+            if(s == null)
+                return false;
         
-        else{
-            System.out.println("Course: " + c.getCode());
-            System.out.println("Section: " + s.getSectionName());
-            //List of sutdents
-            //Total Number of slots
-            //Slots remaining
+            else{
+                System.out.println("Course: " + c.getCode());
+                System.out.println("Section: " + s.getSectionName());
+                //List of sutdents
+                //Total Number of slots
+                //Slots remaining
+            }
         }
         return false;
     }
@@ -143,11 +156,28 @@ public class EnrollmentSystem {
     
     public boolean login(String userName, String password){
         Account user = new Account(userName, password);
-        
+        if(user.equals(admin)){
+            admin.setIsLogIn(true);
+            return true;
+        }
+        else{
+            for(Student s : students){
+                if(s.getUserName().equals(user.getUserName())){
+                    s.setIsLogIn(true);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
     public boolean logout(){
-        
+        admin.setIsLogIn(false);
+        for(Student s : students){
+            if(s.getIsLogIn())
+                s.setIsLogIn(false);
+        }
+        return true;
     }
     
     //getters
