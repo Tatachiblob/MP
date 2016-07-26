@@ -125,11 +125,11 @@ public class EnrollmentSystem {
     
     
     //Student account
-    public boolean enlistSection(){
+    public boolean enlistSection(String course, String section){
         
     }
     
-    public boolean removeEnlistment(){
+    public boolean removeEnlistment(String course, String section){
         
     }
     
@@ -141,10 +141,18 @@ public class EnrollmentSystem {
         
     }
     
+    public boolean login(String userName, String password){
+        Account user = new Account(userName, password);
+        
+    }
+    
+    public boolean logout(){
+        
+    }
+    
     //getters
     public ArrayList<Student> getStudent(){return students;}
     public Admin getAdmin(){return admin;}
     public ArrayList<Course> getCourse(){return courses;}
-    
     
 }

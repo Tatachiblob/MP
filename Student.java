@@ -4,10 +4,12 @@ public class Student extends Account {
     
     private String firstName;
     private String lastName;
+    private boolean isLogIn;
     private boolean isEnrolled;
     private int minUnit;
     private int maxUnit;
     private ArrayList<Course> enlists;
+    private ArrayList<Course> enrolls;
     
     
     public Student(String userName, String password, String lastName, String firstName, int minUnit, int maxUnit){
@@ -21,6 +23,8 @@ public class Student extends Account {
     }
     
     public boolean getIsEnrolled(){return isEnrolled;}
+    
+    public boolean getIsLogIn(){return isLogIn;}
     
     public void setFirstName(String firstName){
         this.firstName = firstName;
