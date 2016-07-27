@@ -137,8 +137,33 @@ public class EnrollmentSystem {
     
     
     //Student account and all incomplete
-    public boolean enlistSection(String course, String section){
-        for(Course c : courses)
+    public boolean enlistSection(String courseCode, String sectionName){
+        Student currentStudent = null;
+        for(Student s : students){
+            if(s.getIsLogIn()){
+                currentStudent = s;
+                System.out.println("Hello");
+            }
+        }
+        if(!currentStudent.getIsEnrolled()){
+            Course imagineary = null;
+            Section copy = null;
+            
+            for(Course c : courses){
+                if(c.getCode().equals(courseCode))
+                    imagineary = c;
+            }
+            
+            for(Section s : imagineary.getSections()){
+                if(s.getSectionName().equals(sectionName))
+                    copy = s;
+            }
+            
+            if(currentStudent.getEnlists().isEmpty()){
+                
+            }
+        }
+        
         return false;
     }
     

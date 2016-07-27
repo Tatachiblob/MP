@@ -38,7 +38,7 @@ public class Student extends Account {
         return myID.equals(otherID);
     }
     
-    public boolean addEnlists(){
+    public boolean addEnlists(String course, String section){
         
     }
     
@@ -48,6 +48,7 @@ public class Student extends Account {
     
     public boolean getIsEnrolled(){return isEnrolled;}
     public boolean getIsLogIn(){return isLogIn;}
+    public ArrayList<Course> getEnlists(){return enlists;}
     public void setIsLogIn(boolean b){
         this.isLogIn = b;
     }

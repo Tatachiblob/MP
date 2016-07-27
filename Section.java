@@ -29,7 +29,7 @@ public class Section {
     public ArrayList<Student> getStudents(){return students;}
     
     public boolean isFull(){//returns true if the capacity is full and used for enlisting
-        return capacity < students.size();
+        return capacity <= students.size();
     }
     
     public boolean isValidSchedule(){//returns true if valid and used for opening section

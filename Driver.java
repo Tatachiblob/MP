@@ -17,5 +17,7 @@ public class Driver {
         
         e.display();
         e.logout();
+        e.login("115109", "Komoro9!");
+        System.out.println(e.enlistSection("INTPRG1", "S14"));
     }
 }
