@@ -12,7 +12,6 @@ public class EnrollmentSystem {
         this.students = new ArrayList<>();
         this.courses = new ArrayList<>();
     }
-    
     //For Admin accounts
     //Boolean so that can display error message for later things
     public boolean RegisterStudentAccount(String ID, String password, String lastName, String firstName, int min, int max){
@@ -139,7 +138,7 @@ public class EnrollmentSystem {
     
     //Student account and all incomplete
     public boolean enlistSection(String course, String section){
-        
+        for(Course c : courses)
         return false;
     }
     

@@ -23,11 +23,6 @@ public class Student extends Account {
         this.enlists = new ArrayList<>();
     }
     
-    public boolean getIsEnrolled(){return isEnrolled;}
-    public boolean getIsLogIn(){return isLogIn;}
-    public void setIsLogIn(boolean b){
-        this.isLogIn = b;
-    }
     
     public void setFirstName(String firstName){
         this.firstName = firstName;
@@ -49,6 +44,12 @@ public class Student extends Account {
     
     public boolean addEnrolls(){
         
+    }
+    
+    public boolean getIsEnrolled(){return isEnrolled;}
+    public boolean getIsLogIn(){return isLogIn;}
+    public void setIsLogIn(boolean b){
+        this.isLogIn = b;
     }
     
     //for checking
