@@ -9,6 +9,7 @@ public class Section {
     private String endTime;
     private int capacity;
     private ArrayList<Student> students;
+    private Course course;
     
     
     public Section(String name, String faculty, String schedule, String start, String end, int capacity){

@@ -4,7 +4,7 @@ public class Admin extends Account {
     private boolean isLogIn;
     
     public Admin(){
-        super("admin", "dlsu");
+        super("admin", "DLSU");
         this.isLogIn = false;
     }
     

@@ -160,7 +160,7 @@ public class EnrollmentSystem {
             }
             
             if(currentStudent.getEnlists().isEmpty()){
-                
+                currentStudent.addEnlists(imagineary, copy);
             }
         }
         
