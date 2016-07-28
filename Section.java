@@ -9,6 +9,7 @@ public class Section {
     private String endTime;
     private int capacity;
     private ArrayList<Student> students;
+    private Course course;
     
     
     public Section(String name, String faculty, String schedule, String start, String end, int capacity){
@@ -27,6 +28,10 @@ public class Section {
     public String getFaculty(){return faculty;}
     public int getCapacity(){return capacity;}
     public ArrayList<Student> getStudents(){return students;}
+    public Course getCourse(){return course;}
+    public void setCourse(Course c){
+        this.course = c;
+    }
     
     public boolean isFull(){//returns true if the capacity is full and used for enlisting
         return capacity <= students.size();
@@ -36,7 +41,6 @@ public class Section {
         return schedule.equals("MW") || schedule.equals("TH");
     }
     
-
     public boolean isValidTime(String time){//return true if time is valid
         boolean ok = false;
         int index = time.indexOf(":");
@@ -101,7 +105,7 @@ public class Section {
     public boolean isThreeChar(){//returns true if three characters and used for opening section
         return sectionName.length() == 3;
     }
-    //Don't add this in the UML yet
+    
     private int toMin(String time){
         int min = 0;
         int index = time.indexOf(":");
@@ -110,7 +114,7 @@ public class Section {
         min = (hh * 60) + mm;
         return min;
     }
-    //Don't add this in UML yet
+    
     private String toHHMM(int min){
         String hhmm = "";
         int hh = min / 60;
@@ -121,7 +125,9 @@ public class Section {
         return hhmm;
     }
     
+    //for checking purpose
     public void display(){
+        System.out.println("\tCouse: " + course);
         System.out.println("\tSection Name: " + sectionName);
         System.out.println("\tFaculty: " + faculty);
         System.out.println("\tSchedule: " + schedule);

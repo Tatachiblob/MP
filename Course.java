@@ -28,6 +28,7 @@ public class Course {
         return !(this.courseCode.equals(c.courseCode));
     }
     
+    //Still need to check
     public boolean addSection(String name, String faculty, String schedule, String start, String end, int capacity){//returns true if added
         Section s = new Section(name, faculty, schedule, start, end, capacity);
         
@@ -39,6 +40,7 @@ public class Course {
             for(int i = 0; i < sections.size(); i++){
                 if(sections.get(i) .isUnique(s) && sections.get(i).isNonConflic(s)){
                     sections.add(s);
+                    s.setCourse(this);
                     return true;
                 }
             }
@@ -47,6 +49,7 @@ public class Course {
         return false;
     }
     
+    //for checking purpose
     public void display(){
         System.out.println("Course Code: " + courseCode);
         System.out.println("Course Name: " + courseName);

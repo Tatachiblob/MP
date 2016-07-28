@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class EnrollmentSystem {
     
     private Admin admin;
+    private Student currentAccount;
     private ArrayList<Student> students;
     private ArrayList<Course> courses;
     
@@ -135,39 +136,13 @@ public class EnrollmentSystem {
             c.display();
     }
     
-    
-    //Student account and all incomplete
-    public boolean enlistSection(String courseCode, String sectionName){
-        Student currentStudent = null;
-        for(Student s : students){
-            if(s.getIsLogIn()){
-                currentStudent = s;
-                System.out.println("Hello");
-            }
-        }
-        if(!currentStudent.getIsEnrolled()){
-            Course imagineary = null;
-            Section copy = null;
-            
-            for(Course c : courses){
-                if(c.getCode().equals(courseCode))
-                    imagineary = c;
-            }
-            
-            for(Section s : imagineary.getSections()){
-                if(s.getSectionName().equals(sectionName))
-                    copy = s;
-            }
-            
-            if(currentStudent.getEnlists().isEmpty()){
-                
-            }
-        }
+    //Student account and not yet done
+    public boolean enlistSection(Course course, Section section){
         
         return false;
     }
     
-    public boolean removeEnlistment(String course, String section){
+    public boolean removeEnlistment(Section section){
         return false;
     }
     
@@ -189,6 +164,7 @@ public class EnrollmentSystem {
             for(Student s : students){
                 if(s.equal(user)){
                     s.setIsLogIn(true);
+                    this.currentAccount = s;
                     return true;
                 }
             }

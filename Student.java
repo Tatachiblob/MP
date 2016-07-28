@@ -21,8 +21,8 @@ public class Student extends Account {
         this.minUnit = minUnit;
         this.maxUnit = maxUnit;
         this.enlists = new ArrayList<>();
+        this.enrolls = new ArrayList<>();
     }
-    
     
     public void setFirstName(String firstName){
         this.firstName = firstName;
@@ -38,14 +38,6 @@ public class Student extends Account {
         return myID.equals(otherID);
     }
     
-    public boolean addEnlists(String course, String section){
-        
-    }
-    
-    public boolean addEnrolls(){
-        
-    }
-    
     public boolean getIsEnrolled(){return isEnrolled;}
     public boolean getIsLogIn(){return isLogIn;}
     public ArrayList<Course> getEnlists(){return enlists;}
@@ -58,15 +50,13 @@ public class Student extends Account {
         System.out.println("ID: " + this.getUserName());
         System.out.println("First Name: " + firstName);
         System.out.println("Last Name: " + lastName);
+        for(Course c : enlists){
+            System.out.println("Course enlisted: "  + c.getName());
+            for(Section s : c.getSections())
+                System.out.println("\tSection: " + s.getSectionName());
+        }
     }
     
     //Testing Testing
-    /*public static void main(String[] args) {
-        Student s1 = new Student("11512709", "Tatachi9", "Inoue", "Yuta", 0, 0);
-        Student s2 = new Student("115122709", "Tatachi9", "Inoue", "Kiku", 0, 0);
-        
-        System.out.println(s1.isEqual(s2));
-        System.out.println(s2.isEqual(s1));
-    }*/
     
 }

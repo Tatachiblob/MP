@@ -14,4 +14,4 @@ public class Account {
         return this.userName.equals(a.userName) && this.password.equals(a.password);
     }
     
-}//Base of Student account and Admin account
+}
