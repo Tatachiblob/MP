@@ -21,31 +21,15 @@ public class Course {
     public int getUnits(){return courseUnit;}
     
     public boolean isSeven(){//returns true if code is 7
-        return courseCode.length() == 7;
+        return courseCode.matches("[\\w-]{7}$");
     }
     
-    public boolean isUnique(Course c){//returns true if unique
-        return !(this.courseCode.equals(c.courseCode));
+    public boolean isNotUnique(Course c){//returns true if not unique
+        return this.courseCode.equals(c.courseCode);
     }
     
     //Still need to check
-    public boolean addSection(String name, String faculty, String schedule, String start, String end, int capacity){//returns true if added
-        Section s = new Section(name, faculty, schedule, start, end, capacity);
-        
-        if(s.isThreeChar() && s.isValidSchedule() && s.isValidTime()){
-            if(this.sections.isEmpty()){
-                sections.add(s);
-                return true;
-            }
-            for(int i = 0; i < sections.size(); i++){
-                if(sections.get(i) .isUnique(s) && sections.get(i).isNonConflic(s)){
-                    sections.add(s);
-                    s.setCourse(this);
-                    return true;
-                }
-            }
-        }
-        
+    public boolean addSection(Section section){//returns true if added
         return false;
     }
     
@@ -61,9 +45,8 @@ public class Course {
     //Testing Testing
     /*
     public static void main(String[] args) {
-        Course  c = new Course("ARCHOS", "Computer architecture", 0);
-        System.out.println(c.addSection("S13", "Inoue Yuta", "MW", "129:00", "10:00", 10));
-        System.out.println(c.addSection("S13", "Inoue Yuta", "MW", "8:00", "8:40", 10));
+        Course  c = new Course("ITMATH3", "Computer architecture", 0);
+        System.out.println(c.isSeven());
         
     }
     */

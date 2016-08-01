@@ -11,7 +11,7 @@ public class Section {
     private ArrayList<Student> students;
     private Course course;
     
-    
+        
     public Section(String name, String faculty, String schedule, String start, String end, int capacity){
         this.sectionName = name;
         this.faculty = faculty;
@@ -41,46 +41,8 @@ public class Section {
         return schedule.equals("MW") || schedule.equals("TH");
     }
     
-    public boolean isValidTime(String time){//return true if time is valid
-        boolean ok = false;
-        int index = time.indexOf(":");
-        String hh = time.substring(0, index);
-        int mm = Integer.parseInt(time.substring(index + 1));
-        
-        switch(hh){
-            case "1":
-            case "2":
-            case "3":
-            case "4":
-            case "5":
-            case "6":
-            case "7":
-            case "8":
-            case "9":
-            case "10":
-            case "11":
-            case "12":
-            case "13":
-            case "14":
-            case "15":
-            case "16":
-            case "17":
-            case "18":
-            case "19":
-            case "20":
-            case "21":
-            case "22":
-            case "23":
-            case "0":
-            case "00":
-                ok = mm >= 0 && mm < 60;
-                break;
-        }
-        return ok;
-    }
-    
     public boolean isValidTime(){
-        return isValidTime(startTime) && isValidTime(endTime);
+        return startTime.matches("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$") && endTime.matches("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
     }
     
     public boolean isNonConflic(Section s){//returns false if there is a conflic in schedule and used for enlisting
@@ -89,6 +51,11 @@ public class Section {
         int end = toMin(endTime);
         int otherStart = toMin(s.startTime);
         int otherEnd = toMin(s.endTime);
+        if(start >= end || otherStart >= otherEnd){
+            return false;
+        }//ex) start 7:30 end 6:00
+        
+        //think it over again
         if(this.schedule .equals(s.schedule)){//MW or TH
             if(start == otherStart || end == otherEnd || (end >= otherStart && start <= otherStart)
                 || (start <= otherEnd && end >= otherEnd) || (end >= otherEnd && otherStart >= start) 
@@ -103,7 +70,7 @@ public class Section {
     }
     
     public boolean isThreeChar(){//returns true if three characters and used for opening section
-        return sectionName.length() == 3;
+        return sectionName.matches("\\w{3}");
     }
     
     private int toMin(String time){
@@ -127,7 +94,7 @@ public class Section {
     
     //for checking purpose
     public void display(){
-        System.out.println("\tCouse: " + course);
+        System.out.println("\tCouse: " + course.getCode());
         System.out.println("\tSection Name: " + sectionName);
         System.out.println("\tFaculty: " + faculty);
         System.out.println("\tSchedule: " + schedule);
@@ -137,10 +104,12 @@ public class Section {
     }
     
     //testing testing
-    /*
+    
     public static void main(String[] args) {
-        Section s = new Section("S12", "Roger Uy", "MW", "123:00", "12:00", 12);
-        System.out.println(s.isValidTime());
+        Course c = new Course("INTPRG2", "Programming", 2);
+        Course c2 = new Course("ARHC-OS", "Architecture", 0);
+        Section s = new Section("S12", "Shirley Chu", "MW", "10:00", "12:00", 12);
+        Section s1 = new Section("S12", "Roger Uy", "MW", "10:00", "12:00", 12);
     }
-    */
+    
 }

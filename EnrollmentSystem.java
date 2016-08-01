@@ -16,7 +16,7 @@ public class EnrollmentSystem {
     //For Admin accounts
     //Boolean so that can display error message for later things
     public boolean RegisterStudentAccount(String ID, String password, String lastName, String firstName, int min, int max){
-        if(admin.getIsLogIn()){
+        if(admin.getIsLogin()){
             Student s = new Student(ID, password, lastName, firstName, min, max);
         
             if(students.size() > 0){
@@ -36,7 +36,7 @@ public class EnrollmentSystem {
     
     //return true if edited
     public boolean editStudent(String ID, String firstName, String lastName){
-        if(admin.getIsLogIn()){
+        if(admin.getIsLogin()){
             if(students.isEmpty())
                 return false;
             else{
@@ -59,18 +59,14 @@ public class EnrollmentSystem {
     
     //returns true if able to addCourse
     public boolean addCourse(String code, String name, int units){
-        if(admin.getIsLogIn()){
+        if(admin.getIsLogin()){
             Course c = new Course(code, name, units);
             if(c.isSeven()){
                 if(courses.isEmpty()){
                     courses.add(c);
                     return true;
                 }
-                for(int i = 0; i < courses.size(); i++){
-                    if(courses.get(i).isUnique(c)){
-                        courses.add(c);
-                        return true;
-                    }
+                else{
                 }
             }
         }
@@ -78,62 +74,28 @@ public class EnrollmentSystem {
     }
     
     //returns true if able to open a section for a course
-    public boolean openSection(String courseCode, String name, String faculty, String schedule, String start, String end, int capacity){
-        if(admin.getIsLogIn()){
-            Course c = null;
-            for(Course course: courses){
-                if(course.getCode().equals(courseCode))
-                    c = course;
-            }
-            //sections is from the courses' sections. Not from this enrollment class
-            ArrayList<Section> sections = c.getSections();
-            
-            if(c != null){
-                return c.addSection(name, faculty, schedule, start, end, capacity);
-            }
-        }
+    public boolean openSection(Course course, Section section){
+        
         return false;
     }
     
     //Not yet complete
-    public boolean viewClassList(String courseCode, String section){
-        if(admin.getIsLogIn()){
-            Course c = null;
-            Section s = null;
-            for(Course a : courses){
-                if(a.getCode().equals(courseCode)){
-                    c = a;
-                }
-            }
-            if(c == null)
-                return false;
-        
-            for(Section a : c.getSections()){
-                if(a.getSectionName().equals(section))
-                    s = a;
-            }
-        
-            if(s == null)
-                return false;
-        
-            else{
-                System.out.println("Course: " + c.getCode());
-                System.out.println("Section: " + s.getSectionName());
-                //List of sutdents
-                //Total Number of slots
-                //Slots remaining
-            }
+    public boolean viewClassList(Course course){
+        if(admin.getIsLogin()){
         }
         return false;
     }
     
     //for checking purpose
     public void display(){
+        /*
         System.out.println("Admin: " + admin.getUserName());
         for(Student s : students)
             s.display();
         for(Course c : courses)
             c.display();
+        */
+        System.out.println("Current Acoount: " + currentAccount.getUserName());
     }
     
     //Student account and not yet done
@@ -155,15 +117,20 @@ public class EnrollmentSystem {
     }
     
     public boolean login(String userName, String password){
+        if(admin.getIsLogin())
+            return false;//Will not login if Admin is still logged in
+        for(Student s : students)
+            if(s.getIsLogin())
+                return false;//Will not login if any Student is still Logged in
         Account user = new Account(userName, password);
         if(user.equal(admin)){
-            admin.setIsLogIn(true);
+            admin.setIsLogin(true);
             return true;
         }
         else{
             for(Student s : students){
                 if(s.equal(user)){
-                    s.setIsLogIn(true);
+                    s.setIsLogin(true);
                     this.currentAccount = s;
                     return true;
                 }
@@ -173,17 +140,40 @@ public class EnrollmentSystem {
     }
     
     public boolean logout(){
-        admin.setIsLogIn(false);
+        admin.setIsLogin(false);
         for(Student s : students){
-            if(s.getIsLogIn())
-                s.setIsLogIn(false);
+            if(s.getIsLogin())
+                s.setIsLogin(false);
         }
+        this.currentAccount = null;
         return true;
     }
     
     //getters
-    public ArrayList<Student> getStudent(){return students;}
+    public ArrayList<Student> getStudents(){return students;}
     public Admin getAdmin(){return admin;}
-    public ArrayList<Course> getCourse(){return courses;}
+    public ArrayList<Course> getCourses(){return courses;}
+    public Student getCurrentStudent(){return currentAccount;}
+    
+    public static void main(String[] args) {
+        EnrollmentSystem e = new EnrollmentSystem();
+        System.out.println(e.login("admin", "DLSU"));
+        System.out.println(e.RegisterStudentAccount("11512709", "Komoro9!", "Inoue", "Yuta", 0, 0));
+        System.out.println(e.RegisterStudentAccount("11512709", "Komoro9!", "Inoue", "Yuta", 0, 0));
+        System.out.println(e.RegisterStudentAccount("11423912", "Komoro9!", "Inoue", "Kiku", 0, 0));
+        System.out.println(e.editStudent("11512709", "Tatachi", "Inoue"));
+        System.out.println(e.logout());
+        System.out.println(e.login("11512789", "KOOMOWQE"));
+        System.out.println(e.login("11512709", "KSDOAS"));
+        System.out.println(e.login("11512709", "Komoro9!"));
+        System.out.println(e.login("admin", "DLSU"));
+        System.out.println(e.login("11423912", "Komoro9!"));
+        e.display();
+        e.logout();
+        System.out.println(e.login("11423912", "Komoro9!"));
+        e.display();
+        e.logout();
+        
+    }
     
 }
