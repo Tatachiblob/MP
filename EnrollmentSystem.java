@@ -6,16 +6,18 @@ public class EnrollmentSystem {
     private Student currentAccount;
     private ArrayList<Student> students;
     private ArrayList<Course> courses;
+    private ArrayList<Section> sections;
     
     //Still have to think if my constructor is ok
     public EnrollmentSystem(){
         this.admin = new Admin();
         this.students = new ArrayList<>();
         this.courses = new ArrayList<>();
+        this.sections = new ArrayList<>();
     }
     //For Admin accounts
     //Boolean so that can display error message for later things
-    public boolean RegisterStudentAccount(String ID, String password, String lastName, String firstName, int min, int max){
+    public boolean RegisterStudentAccount(String ID, String password, String lastName, String firstName, double min, double max){
         if(admin.getIsLogin()){
             Student s = new Student(ID, password, lastName, firstName, min, max);
         
@@ -58,61 +60,107 @@ public class EnrollmentSystem {
     }
     
     //returns true if able to addCourse
-    public boolean addCourse(String code, String name, int units){
+    public boolean addCourse(String code, String name, double units){
         if(admin.getIsLogin()){
-            Course c = new Course(code, name, units);
-            if(c.isSeven()){
+            Course course = new Course(code, name, units);
+            if(course.isSeven()){
                 if(courses.isEmpty()){
-                    courses.add(c);
+                    courses.add(course);
                     return true;
                 }
                 else{
+                    for(Course c : courses){
+                        if(c.isNotUnique(course)){//true if not unique
+                            return false;
+                        }
+                    }
+                    courses.add(course);
+                    return true;
+                }
+            }
+            else 
+                return false;
+        }
+        return false;
+    }
+    
+    //returns true if able to open a section for a course OK NA
+    public boolean openSection(Course course, Section section){
+        if(admin.getIsLogin()){
+            for(Section s : sections){
+                if(s.getSectionName().equals(section.getSectionName()) && s.getCourse() .equals(course.getName())){
+                    return false;
+                }
+            }
+            section.setCourse(course);
+            sections.add(section);
+            return true;
+        }
+        else
+            return false;
+    }
+    
+    //Not yet complete Do I need Section section as a parameter?
+    public boolean viewClassList(Course course, Section section){
+        if(admin.getIsLogin()){
+        }
+        return false;
+    }
+    
+    //Student account and not yet done
+    public boolean enlistSection(Course course, Section section){
+        if(currentAccount.getIsLogin() && !currentAccount.getIsEnrolled()){//If logged in and if not yet enrolled
+            for(Course c : courses){
+                if(!c.equals(course))
+                    return false;//Check if the course parameter exists
+            }
+            for(Section s : sections){
+                if(!s.equals(section))
+                    return false;//Check if the course parameter exists
+            }
+            if(section.isFull())
+                return false;
+            for(Section s : currentAccount.getEnlists()){
+                if(s.getCourse().equals(course))
+                    return false;//The student is not enlisted yet in another section for the same course code
+            }
+            for(Section s : currentAccount.getEnlists()){
+                if(!s.isNonConflic(section))
+                    return false;
+            }
+            currentAccount.getEnlists().add(section);
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean removeEnlistment(Course course, Section section){
+        if(currentAccount.getIsLogin() && !currentAccount.getIsEnrolled()){
+            for(Section s : currentAccount.getEnlists()){
+                if(s.equals(section) && s.getCourse().equals(course))
+                currentAccount.getEnlists().remove(section);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean enroll(){
+        if(currentAccount.getIsLogin() && currentAccount.getIsEnrolled()){
+            if(currentAccount.isEnrollReady()){
+                for(Section s : currentAccount.getEnlists()){
+                    currentAccount.getEnrolls().add(s);
+                    return true;
                 }
             }
         }
         return false;
     }
     
-    //returns true if able to open a section for a course
-    public boolean openSection(Course course, Section section){
-        
-        return false;
-    }
-    
-    //Not yet complete
-    public boolean viewClassList(Course course){
-        if(admin.getIsLogin()){
-        }
-        return false;
-    }
-    
-    //for checking purpose
-    public void display(){
-        /*
-        System.out.println("Admin: " + admin.getUserName());
-        for(Student s : students)
-            s.display();
-        for(Course c : courses)
-            c.display();
-        */
-        System.out.println("Current Acoount: " + currentAccount.getUserName());
-    }
-    
-    //Student account and not yet done
-    public boolean enlistSection(Course course, Section section){
-        
-        return false;
-    }
-    
-    public boolean removeEnlistment(Section section){
-        return false;
-    }
-    
-    public boolean enroll(){
-        return false;
-    }
-    
     public boolean viewEAF(){
+        if(currentAccount.getIsLogin() && currentAccount.getIsEnrolled()){
+            //viewer
+        }
         return false;
     }
     
@@ -153,26 +201,12 @@ public class EnrollmentSystem {
     public ArrayList<Student> getStudents(){return students;}
     public Admin getAdmin(){return admin;}
     public ArrayList<Course> getCourses(){return courses;}
+    public ArrayList<Section> getSections(){return sections;}
     public Student getCurrentStudent(){return currentAccount;}
     
+    
+    
     public static void main(String[] args) {
-        EnrollmentSystem e = new EnrollmentSystem();
-        System.out.println(e.login("admin", "DLSU"));
-        System.out.println(e.RegisterStudentAccount("11512709", "Komoro9!", "Inoue", "Yuta", 0, 0));
-        System.out.println(e.RegisterStudentAccount("11512709", "Komoro9!", "Inoue", "Yuta", 0, 0));
-        System.out.println(e.RegisterStudentAccount("11423912", "Komoro9!", "Inoue", "Kiku", 0, 0));
-        System.out.println(e.editStudent("11512709", "Tatachi", "Inoue"));
-        System.out.println(e.logout());
-        System.out.println(e.login("11512789", "KOOMOWQE"));
-        System.out.println(e.login("11512709", "KSDOAS"));
-        System.out.println(e.login("11512709", "Komoro9!"));
-        System.out.println(e.login("admin", "DLSU"));
-        System.out.println(e.login("11423912", "Komoro9!"));
-        e.display();
-        e.logout();
-        System.out.println(e.login("11423912", "Komoro9!"));
-        e.display();
-        e.logout();
         
     }
     

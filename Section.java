@@ -92,24 +92,9 @@ public class Section {
         return hhmm;
     }
     
-    //for checking purpose
-    public void display(){
-        System.out.println("\tCouse: " + course.getCode());
-        System.out.println("\tSection Name: " + sectionName);
-        System.out.println("\tFaculty: " + faculty);
-        System.out.println("\tSchedule: " + schedule);
-        System.out.println("\tStart Time: " + startTime);
-        System.out.println("\tEnd Time: " + endTime);
-        System.out.println("\tCapacity: " + capacity);
-    }
-    
     //testing testing
     
     public static void main(String[] args) {
-        Course c = new Course("INTPRG2", "Programming", 2);
-        Course c2 = new Course("ARHC-OS", "Architecture", 0);
-        Section s = new Section("S12", "Shirley Chu", "MW", "10:00", "12:00", 12);
-        Section s1 = new Section("S12", "Roger Uy", "MW", "10:00", "12:00", 12);
     }
     
 }
