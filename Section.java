@@ -92,9 +92,4 @@ public class Section {
         return hhmm;
     }
     
-    //testing testing
-    
-    public static void main(String[] args) {
-    }
-    
 }

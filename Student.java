@@ -72,9 +72,4 @@ public class Student extends Account {
         System.out.println(id);
         System.out.println(c);
     }
-    
-    public static void main(String[] args) {
-        Student s = new Student("11512709", "Komoro9!", "Inoue", "Yuta", 0, 0);
-        s.display();
-    }
 }

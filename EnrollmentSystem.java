@@ -17,19 +17,18 @@ public class EnrollmentSystem {
     }
     //For Admin accounts
     //Boolean so that can display error message for later things
-    public boolean RegisterStudentAccount(String ID, String password, String lastName, String firstName, double min, double max){
+    public boolean RegisterStudentAccount(Student student){
         if(admin.getIsLogin()){
-            Student s = new Student(ID, password, lastName, firstName, min, max);
         
             if(students.size() > 0){
                 for(Student y : students){
-                    if(s.isEqual(y)){
+                    if(student.isEqual(y)){
                         return false;
                     }
                 }
             }
         
-            students.add(s);
+            students.add(student);
             return true;
         }
         else
@@ -203,11 +202,5 @@ public class EnrollmentSystem {
     public ArrayList<Course> getCourses(){return courses;}
     public ArrayList<Section> getSections(){return sections;}
     public Student getCurrentStudent(){return currentAccount;}
-    
-    
-    
-    public static void main(String[] args) {
-        
-    }
-    
+
 }
