@@ -29,6 +29,7 @@ public class Section {
     public int getCapacity(){return capacity;}
     public ArrayList<Student> getStudents(){return students;}
     public Course getCourse(){return course;}
+    public String getWholeSchedule(){return schedule + " " + startTime + "-" + endTime;}
     public void setCourse(Course c){
         this.course = c;
     }
@@ -91,5 +92,4 @@ public class Section {
             hhmm = hh + ":" + "00";
         return hhmm;
     }
-    
 }
