@@ -3,17 +3,20 @@ import java.awt.*;
 import java.awt.event.*;
 public class EnlistGUI extends JFrame implements ActionListener{
     
+    private EnrollmentSystem es;
     private JLabel lblSection, lblCourse;
-    private JComboBox<String> sectionBox, courseBox;//<Section> and <Course>
+    private JComboBox<Section> sectionBox; 
+    private JComboBox<Course> courseBox;
     private JButton bEnlist;
     
-    public EnlistGUI(){
+    public EnlistGUI(EnrollmentSystem es){
         super("Machine Project");
         
+        this.es = es;
         this.lblSection = new JLabel("Section: ");
         this.lblCourse = new JLabel("Course: ");
-        this.sectionBox = new JComboBox<>();
-        this.courseBox = new JComboBox<>();
+        this.sectionBox = new JComboBox<>(es.getSectionsVector());
+        this.courseBox = new JComboBox<>(es.getCoursesVector());
         this.bEnlist = new JButton("Enlsit Section!");
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -23,12 +26,6 @@ public class EnlistGUI extends JFrame implements ActionListener{
     }
     
     public void initScreen(){
-        sectionBox.addItem("SampleSection 1");
-        sectionBox.addItem("SampleSection 2");
-        sectionBox.addItem("SampleSection 3");
-        courseBox.addItem("SampleCourse 1");
-        courseBox.addItem("SampleCourse 2");
-        courseBox.addItem("SampleCourse 3");
         
         JPanel p = new JPanel(new GridBagLayout());
         GridBagConstraints con = new GridBagConstraints();
@@ -59,10 +56,18 @@ public class EnlistGUI extends JFrame implements ActionListener{
     }
     
     public void actionPerformed(ActionEvent e){
-        
+        JButton b;
+        Course c;
+        Section s;
+        if(e.getActionCommand().equals("Enlist Section!")){
+            b = (JButton)e.getSource();
+            c = (Course)courseBox.getSelectedItem();
+            s = (Section)sectionBox.getSelectedItem();
+            es.enlistSection(c, s);
+        }
     }
     
     public static void main(String[] args){
-        EnlistGUI a = new EnlistGUI();
+        EnlistGUI a = new EnlistGUI(new EnrollmentSystem());
     }
 }

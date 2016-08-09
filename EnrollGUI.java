@@ -3,12 +3,14 @@ import java.awt.*;
 import java.awt.event.*;
 public class EnrollGUI extends JFrame implements ActionListener{
     
+    private EnrollmentSystem es;
     private JButton ok;
     private JButton cancel;
     
-    public EnrollGUI(){
+    public EnrollGUI(EnrollmentSystem es){
         super("Machine Project");
         
+        this.es = es;
         this.ok = new JButton("Enroll!!");
         this.cancel = new JButton("Cancel");
         
@@ -32,11 +34,33 @@ public class EnrollGUI extends JFrame implements ActionListener{
         add(p);
     }
     
-    public void actionPerformed(ActionEvent e){
+    public void enrollScreen(){
+        JPanel p = new JPanel(new GridBagLayout());
+        GridBagConstraints con = new GridBagConstraints();
+        con.anchor = GridBagConstraints.WEST;
+        con.insets = new Insets(10, 10, 10, 10);
         
+        con.gridx = 0;
+        con.gridy = 0;
+        p.add(new JLabel("Success in Enrolling"));
+        add(p);
+    }
+    
+    public void actionPerformed(ActionEvent e){
+        JButton b;
+        if(e.getActionCommand().equals("Enroll!!")){
+            b = (JButton)e.getSource();
+            if(es.enroll()){
+                //I want a success Frame
+            }
+            else{
+                //I want a error Frame
+            }
+        }
     }
     
     public static void main(String[] args){
-        EnrollGUI a = new EnrollGUI();
+        EnrollmentSystem es = new EnrollmentSystem();
+        EnrollGUI a = new EnrollGUI(es);
     }
 }

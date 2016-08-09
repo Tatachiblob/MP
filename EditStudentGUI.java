@@ -3,15 +3,19 @@ import java.awt.*;
 import java.awt.event.*;
 public class EditStudentGUI extends JFrame implements ActionListener{
     
+    private EnrollmentSystem es;
+    private JComboBox<Student> studentCombo;
     private JLabel lblUsername, lblFirstName, lblLastName;
     private JTextField textUsername, textFirstName, textLastName;
     private JButton edit;
-    private String username, firstName, lastName;
+    private String firstName, lastName;
     
-    public EditStudentGUI(){
+    public EditStudentGUI(EnrollmentSystem es){
         super("Machine Project");
         
+        this.es = es;
         lblUsername = new JLabel("Username: ");
+        this.studentCombo = new JComboBox<>(es.getStudentsVector());
         lblFirstName = new JLabel("First Name: ");
         lblLastName = new JLabel("Last Name: ");
         textUsername = new JTextField();
@@ -40,7 +44,7 @@ public class EditStudentGUI extends JFrame implements ActionListener{
         p.add(lblUsername, con);
         
         con.gridx = 1;
-        p.add(textUsername, con);
+        p.add(studentCombo, con);
         
         con.gridx = 0;
         con.gridy = 1;
@@ -69,15 +73,19 @@ public class EditStudentGUI extends JFrame implements ActionListener{
     
     public void actionPerformed(ActionEvent e){
         JButton b;
+        Student student;
         if(e.getActionCommand().equals(edit.getText())){
             b = (JButton)e.getSource();
-            this.username = textUsername.getText();
+            student = (Student)studentCombo.getSelectedItem();
             this.firstName = textFirstName.getText();
             this.lastName = textLastName.getText();
+            student.setFirstName(firstName);
+            student.setLastName(lastName);
         }
     }
     
     public static void main(String[] args){
-        EditStudentGUI a = new EditStudentGUI();
+        EnrollmentSystem es = new EnrollmentSystem();
+        EditStudentGUI a = new EditStudentGUI(es);
     }
 }

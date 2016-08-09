@@ -1,5 +1,6 @@
 //Inoue, Yuta   Salva, Trisha
 import java.util.ArrayList;
+import java.util.Vector;
 public class EnrollmentSystem {
     
     private Admin admin;
@@ -38,6 +39,7 @@ public class EnrollmentSystem {
     }
     
     //return true if edited
+    //No need to call this anymore
     public boolean editStudent(String ID, String firstName, String lastName){
         if(admin.getIsLogin()){
             if(students.isEmpty())
@@ -193,11 +195,18 @@ public class EnrollmentSystem {
         if(currentAccount == null)
             return false;
         if(currentAccount.getIsLogin() && !currentAccount.getIsEnrolled()){
+            if(courses.contains(course) && sections.contains(section) && section.getCourse().equals(course) && currentAccount.getEnlists().contains(section)){
+                currentAccount.getEnlists().remove(section);
+                return true;
+            }
+            /*
             for(Section s : currentAccount.getEnlists()){
                 if(s.equals(section) && s.getCourse().equals(course))
                 currentAccount.getEnlists().remove(section);
                 return true;
             }
+            */
+            
         }
         return false;
     }
@@ -242,20 +251,20 @@ public class EnrollmentSystem {
         return true;
     }
     
-    public boolean login(String userName, String password){
+    public boolean login(Account dummy){
         if(admin.getIsLogin())
             return false;//Will not login if Admin is still logged in
         for(Student s : students)
             if(s.getIsLogin())
                 return false;//Will not login if any Student is still Logged in
-        Account user = new Account(userName, password);
-        if(user.equal(admin)){
+        //Account user = new Account(userName, password);
+        if(dummy.equal(admin)){
             admin.setIsLogin(true);
             return true;
         }
         else{
             for(Student s : students){
-                if(s.equal(user)){
+                if(s.equal(dummy)){
                     s.setIsLogin(true);
                     this.currentAccount = s;
                     return true;
@@ -275,6 +284,18 @@ public class EnrollmentSystem {
         return true;
     }
     
+    public Vector getCoursesVector(){
+        return new Vector(courses);
+    }
+    
+    public Vector getSectionsVector(){
+        return new Vector(sections);
+    }
+    
+    public Vector getStudentsVector(){
+        return new Vector(students);
+    }
+     
     //getters
     public ArrayList<Student> getStudents(){return students;}
     public Admin getAdmin(){return admin;}

@@ -1,21 +1,20 @@
-import com.sun.scenario.effect.Flood;
+import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-public class OpenSectionGUI extends JFrame{
+public class OpenSectionGUI extends JFrame implements ActionListener{
     
-    private JComboBox<String> courseOption;//<Course>
+    private EnrollmentSystem es;
+    private JComboBox<Course> courseOption;//<Course>
     private JLabel lblSecName, lblFaculty, lblSched, lblStart, lblEnd, lblCaps;
     private JTextField txtSecName, txtFaculty, txtSched, txtStart, txtEnd, txtCaps;
     private JButton select, open;
     
-    public OpenSectionGUI(){
+    public OpenSectionGUI(EnrollmentSystem es){
         super("Machine Project");
         
-        this.courseOption = new JComboBox<>();
-        courseOption.addItem("Sample");
-        courseOption.addItem("Sample");
-        courseOption.addItem("Sample");
+        this.es = es;
+        this.courseOption = new JComboBox<>(es.getCoursesVector());
         this.lblSecName = new JLabel("Section Name: ");
         this.lblFaculty = new JLabel("Faculty: ");
         this.lblSched = new JLabel("Schedule: ");
@@ -27,7 +26,7 @@ public class OpenSectionGUI extends JFrame{
         this.txtFaculty = new JTextField();
         txtFaculty.setColumns(20);
         this.txtSched = new JTextField();
-        txtSched.setColumns(4);
+        txtSched.setColumns(6);
         this.txtStart = new JTextField();
         txtStart.setColumns(6);
         this.txtEnd = new JTextField();
@@ -35,12 +34,13 @@ public class OpenSectionGUI extends JFrame{
         this.txtCaps = new JTextField();
         txtCaps.setColumns(6);
         this.open = new JButton("Open Section");
+        open.addActionListener(this);
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setLayout(new GridBagLayout());
         initScreen();
-        setSize(500,350);
+        setSize(500,450);
         setVisible(true);
     }
     
@@ -73,22 +73,28 @@ public class OpenSectionGUI extends JFrame{
         con.gridy = 3;
         p.add(lblSched, con);
         con.gridx = 1;
-        p.add(txtStart, con);
+        p.add(txtSched, con);
         
         con.gridx = 0;
         con.gridy = 4;
+        p.add(lblStart, con);
+        con.gridx = 1;
+        p.add(txtStart, con);
+        
+        con.gridx = 0;
+        con.gridy = 5;
         p.add(lblEnd, con);
         con.gridx = 1;
         p.add(txtEnd, con);
         
         con.gridx = 0;
-        con.gridy = 5;
+        con.gridy = 6;
         p.add(lblCaps, con);
         con.gridx = 1;
         p.add(txtCaps, con);
         
         con.gridx = 0;
-        con.gridy = 6;
+        con.gridy = 7;
         con.gridwidth = 6;
         con.anchor = GridBagConstraints.CENTER;
         p.add(open, con);
@@ -98,7 +104,27 @@ public class OpenSectionGUI extends JFrame{
         add(p);
     }
     
+    public void actionPerformed(ActionEvent e){
+        JButton b;
+        Section s;
+        Course c;
+        String name, faculty, schedule, start, end;
+        int caps;
+        if(e.getActionCommand().equals("Open Section")){
+            b = (JButton)e.getSource();
+            name = txtSecName.getText();
+            faculty = txtFaculty.getText();
+            schedule = txtSched.getText();
+            start = txtStart.getText();
+            end = txtEnd.getText();
+            caps = Integer.parseInt(txtCaps.getText());
+            c = (Course)courseOption.getSelectedItem();
+            s = new Section(name, faculty, schedule, start, end, caps);
+            es.openSection(c, s);
+        }
+    }
+    
     public static void main(String[] args) {
-        OpenSectionGUI a = new OpenSectionGUI();
+        OpenSectionGUI a = new OpenSectionGUI(new EnrollmentSystem());
     }
 }

@@ -12,7 +12,7 @@ public class Driver {
         Course c2 = new Course("ENGLCOM", "English Communication", 3);
         Course c3 = new Course("ITMATH3", "Math for IT", 2);
         Course c4 = new Course("ARCH-OS", "Computer Architecture", 4);
-        Course c5 = new Course("FITDANCE", "Danceing PE", 4);
+        Course c5 = new Course("FTDANCE", "Danceing PE", 4);
         Section sec = new Section("S12", "Shirely Chu", "MW", "9:00", "10:45", 12);
         Section sec2 = new Section("S13", "Shirely Chu", "MW", "11:00", "12:30", 12);
         Section sec3 = new Section("A23", "Joanna Go", "TH", "7:30", "9:30", 12);
@@ -22,48 +22,48 @@ public class Driver {
         Section sec7 = new Section("S14", "Roger Uy", "MW", "2:00", "3:45", 12);
         Section sec8 = new Section("S12", "Roger Uy", "MW", "4:00", "5:45", 12);
         Section sec9 = new Section("S16", "Roger Uy", "MW", "4:00", "5:45", 12);
-        Section sec10 = new Section("EQ", "Sir? Valdez", "TH", "4:00", "5:45", 12);
+        Section sec10 = new Section("EQ1", "Sir? Valdez", "TH", "4:00", "5:45", 12);
         
         //Admin Login
-        e.login("admin", "DLSU");
+        e.login(new Admin());
         System.out.println("Is Admin Login: " + e.getAdmin().getIsLogin());
-        System.out.println("Register 1st Student: " + e.RegisterStudentAccount(s));
-        System.out.println("Register 2nd Student: " + e.RegisterStudentAccount(s2));
-        System.out.println("Register 3rd Student: " + e.RegisterStudentAccount(s3));
-        System.out.println("Register 4th Student: " + e.RegisterStudentAccount(s4));
-        System.out.println("Register 5th Student: " + e.RegisterStudentAccount(s5));
+        System.out.println("Register 1st Student(Yuta): " + e.RegisterStudentAccount(s));
+        System.out.println("Register 2nd Student(Santa): " + e.RegisterStudentAccount(s2));
+        System.out.println("Register 3rd Student(Trisha): " + e.RegisterStudentAccount(s3));
+        System.out.println("Register 4th Student(Ela): " + e.RegisterStudentAccount(s4));
+        System.out.println("Register 5th Student(Alec): " + e.RegisterStudentAccount(s5));
         for(Student check : e.getStudents()){
             System.out.println("ID: " + check.getUserName());
             System.out.println("Name: " + check.getFullName());
         }
         
-        System.out.println("Add Course : " + e.addCourse(c));
-        System.out.println("Add Course : " + e.addCourse(c2));
-        System.out.println("Add Course : " + e.addCourse(c3));
-        System.out.println("Add Course : " + e.addCourse(c4));
-        System.out.println("Add Course : " + e.addCourse(c5));
+        System.out.println("Add Course(INTPRG2) : " + e.addCourse(c));
+        System.out.println("Add Course(ENGLCOM) : " + e.addCourse(c2));
+        System.out.println("Add Course(ITMATH3) : " + e.addCourse(c3));
+        System.out.println("Add Course(ARCH-OS) : " + e.addCourse(c4));
+        System.out.println("Add Course(FTDANCE) : " + e.addCourse(c5));
         for(Course check : e.getCourses()){
             System.out.println("Course: " + check.getCode());
             System.out.println("Name: " + check.getName());
         }
         
-        System.out.println("Open Section: " + e.openSection(c, sec));
-        System.out.println("Open Section: " + e.openSection(c, sec2));
-        System.out.println("Open Section: " + e.openSection(c2, sec3));
-        System.out.println("Open Section: " + e.openSection(c2, sec4));
-        System.out.println("Open Section: " + e.openSection(c3, sec5));
-        System.out.println("Open Section: " + e.openSection(c3, sec6));
-        System.out.println("Open Section: " + e.openSection(c4, sec7));
-        System.out.println("Open Section: " + e.openSection(c4, sec8));
-        System.out.println("Open Section: " + e.openSection(c5, sec10));
+        System.out.println("Open Section(S12): " + e.openSection(c, sec));
+        System.out.println("Open Section(S13): " + e.openSection(c, sec2));
+        System.out.println("Open Section(A23): " + e.openSection(c2, sec3));
+        System.out.println("Open Section(A24): " + e.openSection(c2, sec4));
+        System.out.println("Open Section(S12): " + e.openSection(c3, sec5));
+        System.out.println("Open Section(S13): " + e.openSection(c3, sec6));
+        System.out.println("Open Section(S14): " + e.openSection(c4, sec7));
+        System.out.println("Open Section(S12): " + e.openSection(c4, sec8));
+        System.out.println("Open Section(EQ1): " + e.openSection(c5, sec10));
         
         for(Section check : e.getSections()){
             System.out.println("Name: " + check.getSectionName());
             System.out.println("Course: " + check.getCourse().getCode());
         }
         
-        System.out.println(e.logout());
-        System.out.println(e.login("11512709", "MyPassword!"));
+        System.out.println("Login: " + e.logout());
+        System.out.println("Logout" + e.login(s));
         System.out.println("Student Name: " + e.getCurrentStudent().getFullName());
         System.out.println("Enlist(INTPRG2)(S13): " + e.enlistSection(c, sec2));// should be true
         System.out.println("Enlist(ENGLCOM)(A24): " + e.enlistSection(c2, sec4));//should be false
@@ -88,7 +88,7 @@ public class Driver {
         }
         */
         System.out.println("Logout: " + (e.logout()));
-        System.out.println("Login: " + e.login("1112342", "0317"));
+        System.out.println("Login" + (e.login(s2)));
         System.out.println("Student Name: " + e.getCurrentStudent().getFullName());
         
         System.out.println("Enlist(INTPRG2)(S13): " + e.enlistSection(c, sec2));
@@ -102,7 +102,7 @@ public class Driver {
         }
         
         System.out.println("Logout: " + e.logout());
-        System.out.println("Login: " + e.login("11512709", "MyPassword!"));
+        System.out.println("Login: " + e.login(s));
         System.out.println("Student Name: " + e.getCurrentStudent().getFullName());
         
         System.out.println("Enlist(INTPRG2)(S13): " + e.enlistSection(c, sec2));
@@ -116,7 +116,7 @@ public class Driver {
         }
         
         System.out.println("Logout: " + (e.logout()));
-        System.out.println("Login: " + e.login("1112342", "0317"));
+        System.out.println("Login: " + e.login(s2));
         System.out.println("Student Name: " + e.getCurrentStudent().getFullName());
         
         System.out.println("Enlist(INTPRG2)(S13): " + e.enlistSection(c, sec2));// should be true
@@ -130,7 +130,7 @@ public class Driver {
         }
         
         System.out.println("Logout: " + (e.logout()));
-        System.out.println("Login: " + e.login("1112342", "0317"));
+        System.out.println("Login: " + e.login(s2));
         System.out.println("Student Name: " + e.getCurrentStudent().getFullName());
         
         System.out.println("Remove: " + e.removeEnlistment(c, sec2));
@@ -140,7 +140,7 @@ public class Driver {
         }
         
         System.out.println("Logout: " + (e.logout()));
-        System.out.println("Login: " + e.login("11512709", "MyPassword!"));
+        System.out.println("Login: " + e.login(s));
         System.out.println("Student Name: " + e.getCurrentStudent().getFullName());
         for(Section check : e.getCurrentStudent().getEnlists()){
             System.out.println("Enlisted Section: " + check.getSectionName()); 
@@ -163,23 +163,31 @@ public class Driver {
         System.out.println("Enlist(After Enroll): " + e.enlistSection(c5, sec10));
         
         System.out.println("Logout: " + (e.logout()));
-        System.out.println("Login: " + e.login("1112342", "0317"));
+        System.out.println("Login: " + e.login(s2));
         System.out.println("Student Name: " + e.getCurrentStudent().getFullName());
         
         for(Section check : e.getCurrentStudent().getEnlists()){
             System.out.println("Enlisted Section: " + check.getSectionName()); 
             System.out.println("Enlisted Course: " + check.getCourse().getCode()); 
         }
-        System.out.println("Total Units Enlisted: " + e.getCurrentStudent().getTotalUnitsEnlisted());
         System.out.println("Enlist(ENGLCOM)(A23): " + e.enlistSection(c2, sec3));
         System.out.println("Enlist(ITMATH3)(S12): " + e.enlistSection(c3, sec5));
         System.out.println("Enlist(INTPRG2)(S13): " + e.enlistSection(c, sec2));
         System.out.println("Enlist(ARCH-OS)(S12): " + e.enlistSection(c4, sec8));
+        System.out.println("Enlist(ARCH-OS)(EQ1): " + e.enlistSection(c5, sec10));
+        for(Section check : e.getCurrentStudent().getEnlists()){
+            System.out.println("Enlisted Section: " + check.getSectionName()); 
+            System.out.println("Enlisted Course: " + check.getCourse().getCode()); 
+        }
+        System.out.println("Remove a false section: " + e.removeEnlistment(c5, sec));
+        System.out.println("Remove (FTDANCE)(EQ1): " + e.removeEnlistment(c5, sec10));
+        System.out.println("Remove (FTDANCE)(EQ1) again: " + e.removeEnlistment(c5, sec10));
+        
         System.out.println("Enroll: " + e.enroll());
         e.viewEAF();
         
         e.logout();
-        e.login("admin", "DLSU");
+        e.login(new Admin());
         e.viewClassList(c, sec2);
     }
     

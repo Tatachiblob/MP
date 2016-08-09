@@ -3,18 +3,21 @@ import java.awt.*;
 import java.awt.event.*;
 public class RemoveEnlistGUI extends JFrame implements ActionListener{
     
+    private EnrollmentSystem es;
     private JLabel lblSection, lblCourse;
-    private JComboBox<String> sectionBox, courseBox;//<Section> and <Course>
+    private JComboBox<Section> sectionBox; 
+    private JComboBox<Course> courseBox;
     private JButton bRemove;
     
-    public RemoveEnlistGUI(){
+    public RemoveEnlistGUI(EnrollmentSystem es){
         super("Machine Project");
         
+        this.es = es;
         this.lblSection = new JLabel("Section: ");
         this.lblCourse = new JLabel("Course: ");
-        this.sectionBox = new JComboBox<>();
-        this.courseBox = new JComboBox<>();
-        this.bRemove = new JButton("Enlsit Section!");
+        this.sectionBox = new JComboBox<>(es.getSectionsVector());
+        this.courseBox = new JComboBox<>(es.getCoursesVector());
+        this.bRemove = new JButton("Remove Enlistment!");
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         initScreen();
@@ -23,12 +26,6 @@ public class RemoveEnlistGUI extends JFrame implements ActionListener{
     }
     
     public void initScreen(){
-        sectionBox.addItem("SampleSection 1");
-        sectionBox.addItem("SampleSection 2");
-        sectionBox.addItem("SampleSection 3");
-        courseBox.addItem("SampleCourse 1");
-        courseBox.addItem("SampleCourse 2");
-        courseBox.addItem("SampleCourse 3");
         
         JPanel p = new JPanel(new GridBagLayout());
         GridBagConstraints con = new GridBagConstraints();
@@ -59,10 +56,19 @@ public class RemoveEnlistGUI extends JFrame implements ActionListener{
     }
     
     public void actionPerformed(ActionEvent e){
-        
+        JButton b;
+        if(e.getActionCommand().equals("Remove Enlistment")){
+            b = (JButton)e.getSource();
+            Course c;
+            Section s;
+            c = (Course)courseBox.getSelectedItem();
+            s = (Section)sectionBox.getSelectedItem();
+            es.removeEnlistment(c, s);
+        }
     }
     
     public static void main(String[] argss){
-        
+        EnrollmentSystem es = new EnrollmentSystem();
+        RemoveEnlistGUI a = new RemoveEnlistGUI(es);
     }
 }

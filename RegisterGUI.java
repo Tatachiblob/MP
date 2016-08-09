@@ -102,6 +102,7 @@ public class RegisterGUI extends JFrame implements ActionListener{
     
     public void actionPerformed(ActionEvent e){
         JButton b;
+        Student s;
         if(e.getActionCommand().equals(register.getText())){
             b = (JButton)e.getSource();
             this.username = textUser.getText();
@@ -110,6 +111,7 @@ public class RegisterGUI extends JFrame implements ActionListener{
             this.lastName = textLast.getText();
             this.maxUnits = Double.parseDouble(textMax.getText());
             this.minUnits = Double.parseDouble(textMin.getText());
+            s = new Student(username, password, lastName, firstName, minUnits, maxUnits);
         }
         //System.out.println("Username: " + username);
         //System.out.println("Password: " + password);
