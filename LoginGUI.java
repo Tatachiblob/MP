@@ -58,7 +58,7 @@ public class LoginGUI extends JFrame implements ActionListener{
         p.add(login, con);
         
         p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Login Panel"));
-        
+        p.setBackground(new Color(127,191,127));
         add(p);
     }
     
