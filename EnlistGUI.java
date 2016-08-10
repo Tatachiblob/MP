@@ -50,7 +50,7 @@ public class EnlistGUI extends JFrame implements ActionListener{
         con.gridwidth = 2;
         
         p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Enlistment Panel"));
-        
+        p.setBackground(new Color(127,191,127));
         p.add(bEnlist, con);
         add(p);
     }
