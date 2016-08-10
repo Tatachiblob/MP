@@ -133,7 +133,7 @@ public class Driver {
         System.out.println("Login: " + e.login(s2));
         System.out.println("Student Name: " + e.getCurrentStudent().getFullName());
         
-        System.out.println("Remove: " + e.removeEnlistment(c, sec2));
+        System.out.println("Remove(S13INTPRG): " + e.removeEnlistment(sec2));
         for(Section check : e.getCurrentStudent().getEnlists()){
             System.out.println("Enlisted Section: " + check.getSectionName()); 
             System.out.println("Enlisted Course: " + check.getCourse().getCode()); 
@@ -179,9 +179,8 @@ public class Driver {
             System.out.println("Enlisted Section: " + check.getSectionName()); 
             System.out.println("Enlisted Course: " + check.getCourse().getCode()); 
         }
-        System.out.println("Remove a false section: " + e.removeEnlistment(c5, sec));
-        System.out.println("Remove (FTDANCE)(EQ1): " + e.removeEnlistment(c5, sec10));
-        System.out.println("Remove (FTDANCE)(EQ1) again: " + e.removeEnlistment(c5, sec10));
+        //System.out.println("Remove (FTDANCE)(EQ1): " + e.removeEnlistment(sec10));
+        //System.out.println("Remove (FTDANCE)(EQ1) again: " + e.removeEnlistment(sec10));
         
         System.out.println("Enroll: " + e.enroll());
         e.viewEAF();

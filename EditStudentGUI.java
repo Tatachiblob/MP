@@ -77,11 +77,14 @@ public class EditStudentGUI extends JFrame implements ActionListener{
         if(e.getActionCommand().equals(edit.getText())){
             b = (JButton)e.getSource();
             student = (Student)studentCombo.getSelectedItem();
+            //System.out.println("Before: " + student.getFullName());
             this.firstName = textFirstName.getText();
             this.lastName = textLastName.getText();
             student.setFirstName(firstName);
             student.setLastName(lastName);
+            //System.out.println("After: " + student.getFullName());
         }
+        
     }
     
     public static void main(String[] args){

@@ -1,5 +1,5 @@
 //Inoue, Yuta   Salva, Trisha
-import java.util.ArrayList;
+import java.util.*;
 public class Student extends Account {
     
     private String firstName;
@@ -69,6 +69,23 @@ public class Student extends Account {
         return getTotalUnitsEnlisted() >= minUnit && getTotalUnitsEnlisted() <= maxUnit;
     }
     
+    @Override
+    public String toString(){
+        return this.getUserName();
+    }
+    
+    public Vector getEnlistedSectionsVector(){
+        return new Vector(enlists);
+    }
+    
+    public Vector getEnlistedCourseVector(){
+        ArrayList<Course> courses = new ArrayList<>();
+        for(Section check : enlists){
+            courses.add(check.getCourse());
+        }
+        return new Vector(courses);
+    }
+    
     //for checking
     public void display(){
         String NAMEFORMAT = "%s:%s";
@@ -81,4 +98,5 @@ public class Student extends Account {
         System.out.println(id);
         System.out.println(c);
     }
+    
 }

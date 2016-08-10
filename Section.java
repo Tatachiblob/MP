@@ -74,6 +74,29 @@ public class Section {
         return sectionName.matches("\\w{3}");
     }
     
+    public String getInfo(){
+        String FORMAT = "%-10s %-2s %-30s";
+        String s, a;
+        s = String.format(FORMAT, "Code",":", course.getCode());
+        s = s + "\n" + String.format(FORMAT, "Course", ":", course.getName());
+        s = s + "\n" + String.format(FORMAT, "Section",":", sectionName);
+        s = s + "\n" + String.format(FORMAT, "Teacher",":", faculty);
+        s = s + "\n" + String.format(FORMAT, "Schedule",":", getWholeSchedule());
+        s = s + "\n" + String.format(FORMAT, "Units",":", course.getUnits());
+        a = "Code: " + course.getCode();
+        a = a + "\nCourse: " + course.getName();
+        a = a + "\nSection: " + sectionName;
+        a = a + "\nTeacher: " + faculty;
+        a = a + "\nSchedule: " + getWholeSchedule();
+        a = a + "\nUnits: " + course.getUnits();
+        return s;
+    }
+    
+    @Override
+    public String toString(){
+        return this.sectionName;
+    }
+    
     private int toMin(String time){
         int min = 0;
         int index = time.indexOf(":");

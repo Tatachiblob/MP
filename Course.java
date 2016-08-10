@@ -33,6 +33,9 @@ public class Course {
         return this.courseCode.equals(c.courseCode);
     }
     
-    
+    @Override
+    public String toString(){
+        return this.courseCode;
+    }
     
 }

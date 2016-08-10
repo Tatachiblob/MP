@@ -191,22 +191,14 @@ public class EnrollmentSystem {
         return false;
     }
     
-    public boolean removeEnlistment(Course course, Section section){
+    public boolean removeEnlistment(Section section){
         if(currentAccount == null)
             return false;
         if(currentAccount.getIsLogin() && !currentAccount.getIsEnrolled()){
-            if(courses.contains(course) && sections.contains(section) && section.getCourse().equals(course) && currentAccount.getEnlists().contains(section)){
+            if(sections.contains(section) && currentAccount.getEnlists().contains(section)){
                 currentAccount.getEnlists().remove(section);
                 return true;
             }
-            /*
-            for(Section s : currentAccount.getEnlists()){
-                if(s.equals(section) && s.getCourse().equals(course))
-                currentAccount.getEnlists().remove(section);
-                return true;
-            }
-            */
-            
         }
         return false;
     }
