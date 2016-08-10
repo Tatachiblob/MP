@@ -67,7 +67,7 @@ public class EditStudentGUI extends JFrame implements ActionListener{
         p.add(edit, con);
         
         p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Edit Student Panel"));
-        
+        p.setBackground(new Color(127,191,127));
         add(p);
     }
     
