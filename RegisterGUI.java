@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 public class RegisterGUI extends JFrame implements ActionListener{
     
+    private EnrollmentSystem es;
     private JLabel lblUser, lblPassword, lblFirst, lblLast, lblMin, lblMax;
     private JTextField textUser, textFirst, textLast, textMin, textMax;
     private JPasswordField textPassword;
@@ -11,9 +12,10 @@ public class RegisterGUI extends JFrame implements ActionListener{
     private String username, password, firstName, lastName;
     private double minUnits, maxUnits;
     
-    public RegisterGUI(){
+    public RegisterGUI(EnrollmentSystem es){
         super("Machine Project");
         
+        this.es = es;
         this.lblUser = new JLabel("Username: ");
         this.lblPassword = new JLabel("Password: ");
         this.lblFirst = new JLabel("First Name: ");
@@ -38,7 +40,7 @@ public class RegisterGUI extends JFrame implements ActionListener{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         initScreen();
         setSize(700,350);
-        setVisible(true);
+        setVisible(false);
     }
     
     public void initScreen(){
@@ -100,9 +102,10 @@ public class RegisterGUI extends JFrame implements ActionListener{
         add(p);
     }
     
+    @Override
     public void actionPerformed(ActionEvent e){
         JButton b;
-        Student s;
+        Student s = null;
         if(e.getActionCommand().equals(register.getText())){
             b = (JButton)e.getSource();
             this.username = textUser.getText();
@@ -112,17 +115,21 @@ public class RegisterGUI extends JFrame implements ActionListener{
             this.maxUnits = Double.parseDouble(textMax.getText());
             this.minUnits = Double.parseDouble(textMin.getText());
             s = new Student(username, password, lastName, firstName, minUnits, maxUnits);
+            if(es.RegisterStudentAccount(s)){
+                
+            }
+            else{
+                ErrorMSG error = new ErrorMSG(es);
+                error.setVisible(true);
+            }
         }
-        //System.out.println("Username: " + username);
-        //System.out.println("Password: " + password);
-        //System.out.println("First Name: " + fisrtName);
-        //System.out.println("Last Name: " + lastName);
-        //System.out.println("Minimum Units: " + minUnits);
-        //System.out.println("Maximum Units: " + maxUnits);
     }
     
     public static void main(String[] args){
-        RegisterGUI a = new RegisterGUI();
+        EnrollmentSystem es = new EnrollmentSystem();
+        Account dummy = new Account("admin", "DLSU");
+        es.login(dummy);
+        RegisterGUI a = new RegisterGUI(es);
         
     }
     

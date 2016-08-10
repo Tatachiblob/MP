@@ -64,7 +64,7 @@ public class LoginGUI extends JFrame implements ActionListener{
     
     public void actionPerformed(ActionEvent e){
         JButton b;
-        Account a;
+        Account a = null;
         if(e.getActionCommand().equals(login.getText())){
             b = (JButton)e.getSource();
             this.username = txtUsername.getText();
@@ -72,15 +72,15 @@ public class LoginGUI extends JFrame implements ActionListener{
             a = new Account(username, password);
             this.account = new Account(username, password);
             
-            es.login(a);
+            if(es.login(a)){
+                MainMenuBar menu = new MainMenuBar(es);
+                this.dispose();
+            }
+            else{
+                ErrorMSG error = new ErrorMSG(es);
+                error.setVisible(true);
+            }
         }
-    }
-    
-    public Account getAccount(){return account;}
-    
-    public static void main(String[] args) {
-        EnrollmentSystem es = new EnrollmentSystem();
-        LoginGUI a = new LoginGUI(es);
     }
     
 }

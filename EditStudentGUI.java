@@ -86,6 +86,19 @@ public class EditStudentGUI extends JFrame implements ActionListener{
     
     public static void main(String[] args){
         EnrollmentSystem es = new EnrollmentSystem();
+        Account as = new Account("admin", "DLSU");
+        Student s = new Student("11512709", "MyPassword!", "Inoue", "Yuta", 10, 30);
+        Student s2 = new Student("1112342", "0317", "Gabriel", "Santa", 10, 30);
+        Student s3 = new Student("11421329", "YourMom", "Salva", "Trisha", 10, 30);
+        Student s4 = new Student("11249237", "Happy", "Pilapil", "Ela", 10, 30);
+        Student s5 = new Student("11723164", "Kevin", "Uy", "Alec", 10, 30);
+        es.login(as);
+        es.RegisterStudentAccount(s);
+        es.RegisterStudentAccount(s2);
+        es.RegisterStudentAccount(s3);
+        es.RegisterStudentAccount(s4);
+        es.RegisterStudentAccount(s5);
+        
         EditStudentGUI a = new EditStudentGUI(es);
     }
 }

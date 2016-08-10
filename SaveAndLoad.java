@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 public class SaveAndLoad {
     
-    public void Writer(ArrayList<Course> courses){
+    public void coursesWriter(ArrayList<Course> courses){
         File f = new File("Course.txt");
         BufferedWriter bw;
         
@@ -21,13 +21,13 @@ public class SaveAndLoad {
             bw.close();
             
         }catch(Exception e){
-            System.out.println("(SaveAndLoad:Writer): " + e.toString());
+            System.out.println("(SaveAndLoad:courseWriter): " + e.toString());
         }
         
         
     }
     
-    public ArrayList<Course> Reader(){
+    public ArrayList<Course> coursesReader(){
         File f = new File("Course.txt");
         
         BufferedReader br;
@@ -66,10 +66,64 @@ public class SaveAndLoad {
             
         }catch(Exception e)
         {
-            System.out.println("(SaveAndLoad:Reader): " + e.toString());
+            System.out.println("(SaveAndLoad:courseReader): " + e.toString());
         }
         return courses;
     }
+    
+    public void sectionWriter(ArrayList<Section> section){
+        
+    }
+    
+    public ArrayList<Section> sectionsReader(){
+        File f = new File("Section.txt");
+        
+        BufferedReader br;
+        String line;
+        ArrayList<Course> sections = new ArrayList<>();
+        Section s = null;
+        Course c = null;
+        
+        String name = null;
+        String faculty = null;
+        String schedule = null;
+        String start = null;
+        String end = null;
+        int capacity = -1;
+        
+        try{
+            br = new BufferedReader(new FileReader(f));
+            while((line = br.readLine()) != null){
+                if(line.substring(0, line.indexOf('=')).equalsIgnoreCase("Section Name")){
+                    faculty = line.substring(line.indexOf('=') + 1);
+                }
+                if(line.substring(0, line.indexOf('=')).equalsIgnoreCase("Faculty")){
+                    faculty = line.substring(line.indexOf('=') + 1);
+                }
+                if(line.substring(0, line.indexOf('=')).equalsIgnoreCase("Schedule")){
+                    schedule = line.substring(line.indexOf('=') + 1);
+                }
+                if(line.substring(0, line.indexOf('=')).equalsIgnoreCase("Start Time")){
+                    start = line.substring(line.indexOf('=') + 1);
+                }
+                if(line.substring(0, line.indexOf('=')).equalsIgnoreCase("End Time")){
+                    end = line.substring(line.indexOf('=') + 1);
+                }
+                if(line.substring(0, line.indexOf('=')).equalsIgnoreCase("Capacity")){
+                    capacity = Integer.parseInt(line.substring(line.indexOf ('=') + 1));
+                }
+                if(capacity != -1){
+                    
+                }
+            }
+            br.close();
+            
+            }catch(Exception e)
+        {
+            System.out.println("(SaveAndLoad:sectionReader): " + e.toString());
+        }
+    }
+    
     public static void main(String[] args) {
         
     }

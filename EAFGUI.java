@@ -6,7 +6,7 @@ public class EAFGUI extends JFrame{
     private EnrollmentSystem es;
     private JLabel lblName, lblID;//, lblCode, lblCourse, lblSection, lblFaculty, lblSched,lblUnit,lblTotalUnit;
     private JLabel lblFormat;
-    private JLabel[] lblSubjects;
+    private JTextArea txtSubjects;
     private JButton ok;
     
     public EAFGUI(EnrollmentSystem es){
@@ -16,10 +16,13 @@ public class EAFGUI extends JFrame{
         this.lblFormat = new JLabel();
         this.lblName = new JLabel("NAME: " + es.getCurrentStudent().getFullName());
         this.lblID = new JLabel("ID NUMBER: " + es.getCurrentStudent().getUserName());
-        this.lblSubjects = new JLabel[es.getCurrentStudent().getEnrolls().size()];
+        //this.lblSubjects = new JLabel[es.getCurrentStudent().getEnrolls().size()];
+        this.txtSubjects = new JTextArea();
+        txtSubjects.setEditable(false);
+        /*
         for(JLabel a : lblSubjects){
             a = new JLabel();
-        }
+        }*/
         /*
         this.lblCode = new JLabel("CODE");
         this.lblCourse = new JLabel("COURSE NAME");
@@ -41,17 +44,20 @@ public class EAFGUI extends JFrame{
         ArrayList<Section> sections = es.getCurrentStudent().getEnrolls();
         String FORMAT = "%-10s %-30s %-10s %-30s %-20s %-5s";
         String s = String.format(FORMAT,"CODE", "COURSE", "SECTION", "TEACHER", "SCHEDULE", "UNITS");
+        System.out.println(s);
         lblFormat.setText(s);
+        String contents = "";
         
-        
-        for(int i = 0; i < lblSubjects.length; i++){
+        for(int i = 0; i < es.getCurrentStudent().getEnrolls().size(); i++){
             s = String.format(FORMAT, sections.get(i).getCourse().getCode(), 
                     sections.get(i).getCourse().getName(), sections.get(i).getSectionName(), 
                     sections.get(i).getFaculty(), 
                     sections.get(i).getWholeSchedule(),
                     Double.toString(sections.get(i).getCourse().getUnits()));
-            lblSubjects[i] = new JLabel(s);
+            contents += s + "\n";
         }
+        System.out.println(contents);
+        txtSubjects.setText(contents);
         
         JPanel p1 = new JPanel(new GridBagLayout());
         GridBagConstraints con1 = new GridBagConstraints();
@@ -68,11 +74,22 @@ public class EAFGUI extends JFrame{
         con1.gridy = 2;
         p1.add(lblFormat, con1);
         
+        con1.gridy = 3;
+        p1.add(txtSubjects, con1);
+        
         JPanel p2 = new JPanel(new GridBagLayout());
         GridBagConstraints con2 = new GridBagConstraints();
         con2.anchor = GridBagConstraints.WEST;
         con2.insets = new Insets(10, 10, 10, 10);
+        JPanel whole = new JPanel(new GridBagLayout());
+        GridBagConstraints entire = new GridBagConstraints();
+        entire.anchor = GridBagConstraints.WEST;
+        entire.insets = new Insets(10, 10, 10, 10);
         
+        entire.gridx = 0;
+        entire.gridy = 0;
+        whole.add(p1, entire);
+        /*
         int i = 0;
         int y = 0;
         do{
@@ -82,10 +99,10 @@ public class EAFGUI extends JFrame{
             y++;
         }while(i < lblSubjects.length);
         
-        con1.gridy = 3;
-        p1.add(p2, con1);
+        entire.gridy = 1;
+        whole.add(p2, entire);
+        *./        add(whole);
         
-        add(p1);
         /*
         JPanel p1 = new JPanel(new GridBagLayout());
         JPanel p2 = new JPanel(new GridBagLayout());
@@ -153,10 +170,10 @@ public class EAFGUI extends JFrame{
         entire.gridy = 1;
         whole.add(p2, entire);
         
-        
+       */
         whole.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "View EAF Panel"));
         
-        add(whole);*/
+        add(whole);
     }
     
     public static void main(String[] args){
