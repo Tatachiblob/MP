@@ -99,6 +99,7 @@ public class RegisterGUI extends JFrame implements ActionListener{
         p.add(register, con);
         
         p.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Student Register Panel"));
+        p.setBackground(new Color(127,191,127));
         add(p);
     }
     
