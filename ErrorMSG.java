@@ -8,17 +8,24 @@ public class ErrorMSG extends JFrame implements ActionListener{
     private JButton ok;
     
     public ErrorMSG(EnrollmentSystem es){
+        /*
         super("Machine Project");
         
         this.es = es;
-        this.error = new JLabel("Error");
+        this.error = new JLabel("Error");*/
+        JFrame p = new JFrame();
+        JOptionPane.showMessageDialog(p,
+        "Error!!",
+        "Machine Project",
+        JOptionPane.ERROR_MESSAGE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.ok = new JButton("OK");
         ok.addActionListener(this);
-        
+        /*
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         initScreen();
         setSize(270,150);
-        setVisible(true);
+        setVisible(true);*/
     }
     
     public void initScreen(){
