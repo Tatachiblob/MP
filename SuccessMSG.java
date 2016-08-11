@@ -7,7 +7,7 @@ public class SuccessMSG extends JFrame implements ActionListener{
     private JLabel error;
     private JButton ok;
     
-    public ErrorMSG(EnrollmentSystem es){
+    public SuccessMSG(EnrollmentSystem es){
         JFrame p = new JFrame();
         JOptionPane.showMessageDialog(p,
         "Success!!",
